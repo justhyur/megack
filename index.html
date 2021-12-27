@@ -65,6 +65,7 @@
             <p style="text-align: center">There's been a problem.<br/>Please, try again later.</p>
         </div>
     </div>
+    <script type="text/javascript" src="node_modules/crypto-js/crypto-js.js"></script>
     <script>
         function setFavicons(favImg){
             let headTitle = document.querySelector('head');
@@ -74,23 +75,17 @@
             headTitle.appendChild(setFavicon);
         }
         window.onload = () => {
-            const search = location.search;
+            const crs = 'U2FsdGVkX194Zi564cw5ftC9PHGwBNsvBdW5pPW/kR3d3GucypsagSJZTh5G1L/QF+AE/TQwqMs2GLnHqqzkK8hDX7Bu/30bjXVg2JxIkTprJMUcmgmDX04Z0EfbyilOqp2K9UUkd47nOCQs1NeVCK9H/lzZEY9FBoN6ZuBx1hk3wcurqRMseCg80CCl13zsylVz3bMxsOnQZIicFVWXUgM1eZ69jw1H36ZVZewHBqBJQHi2IcNTuvhV9oUxjtgDlgXqsaG5jQWqZo0Er+7kNP0ZH3WhMKrLHhGNa7vAVQu1hj1rMHQB4+xhhpvlxxH4BohUqsXVMoaZPctyfYByZNDEK36DxH7iMxySUs/elQ8jZuyWErOuZxNAaGyPZ96vVm/d/9XVT6Dqb+rSuP1KC8H4Tzh/qp12gykxooDUV2Bdwrhz2dRXzQ5FB7IgG3ipMZ2oIj3ajjzWM/mfo8y7QLKJGrtLn1hE2Ut1yJjGeD+dZ82NsXJgaFEkmjrb48FCZytr/CHWUTOVB7h8l+bW0CjpiLVlcAN011n9oK08x7bM/K8PLKJW4f3f8dR8o81VB9h/fYtzsYR9gO3YepJojZdKPPoUJVLmtenI+1ERPm6fXjkh9iLzYPg5l/op6MppdzqNEiuHPn5ZcLG9c/CjOfYcH46qvpgAgVpjINBFWYwaDbVtq1x/LTM5jGHUqa1imweu8luFWr7te4mcxu6ATlAww9qdlUvb96pZQNWu++4TdcGxO2bookBnFXCUXuUC9O5y+LJ5Yw/OrjSPOEDi7oiLLHvPWVtMyEe0BP+ihiodchEMQspV+O6ZI1iwSueBIgMfjLi/tcGPjxS06NysIQC7ZAI+kWHQCLhWQj7DjbdLByE2wfGDPHf1OUcF47o8DCmEwzUBn36GOjznOnPumSQsWo1xRENzjAQWk4zbCB8Rmabqb9KrRuooOVmBZC+CcbKIrLmjEusYGs0fXryvRtjfk9mReFyCX80qbsX3NwLKbTA70r/xeB0LOzBBGBgPsxVySOV+Gk11MhfnWNybkZYLAJrzIG7D+3kvruIaBvz2hadYBPwt6UP3TZD7QtO53mQneSP1idnsB6ar1AKHWWqCcWLSkEWsPcksq9NuH+xk/xWzsFMR5MiAL5NR1JcnmvkzC3lxNEokIDzI3sJRUo73VejyB/jJSib3Qm+LxpGR0uAD0UBuhSzwjS6Dy+X314CMvAwYKXykV7D3MbARw5CCySE+DKM0SHcjcO6G0+9M5bZaD2weeMJMdLC0ZRVvl+iHTa/+5bNUPyvSvzkaQv6Oq+ewEwveW8nYDwDiovU=';
+            const bytes  = CryptoJS.AES.decrypt(crs, location.search);
+            const search = bytes.toString(CryptoJS.enc.Utf8);
             const urlParams = new URLSearchParams(search);
-            console.log(search)
             
             let data = {};
             urlParams.forEach((value, key) => {
                 data[key] = value;
             });
 
-            if(Object.keys(data).length > 0){
-                localStorage.setItem("data", JSON.stringify(data));
-                window.location.href="/"
-            }else{
-                data = JSON.parse(localStorage.getItem("data"));
-            }
-
-            if(data){
+            if(data && Object.keys(data).length > 0){
                 const pText = `
                     ${data.t1}<br/><strong>${data.name}</strong><br/>
                     ${data.t2}<strong>${data.birth}</strong> in <strong>${data.city}</strong><br/>
@@ -123,11 +118,9 @@
                 document.querySelector("#cadd").innerHTML = data.cadd;
                 document.querySelector("#fvac").innerHTML = data.fvac;
                 setFavicons(data.favicon);
-    
                 document.querySelector("#error").style.display = "none";
                 document.querySelector("#content").style.display = "block";
             }
-
         }
     </script>
 </body>
