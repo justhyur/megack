@@ -4,9 +4,131 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title></title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-    Ciaonsei
+    <div class="header">
+        <a id="logoLink"><img id="logo"/></a>
+    </div>
+    <div class="container">
+        <div id="content" class="content" style="display:none">
+            <p id="p"></p>
+            <table>
+                <tr>
+                    <th id="th1-1"></th>
+                    <td>D1</td>
+                </tr>
+                <tr>
+                    <th id="th2-1"></th>
+                    <td id="d1"></td>
+                </tr>
+                <tr>
+                    <th id="th3-1"></th>
+                    <td id="vn1"></td>
+                </tr>
+                <tr>
+                    <th id="th4-1"></th>
+                    <td id="com1"></td>
+                </tr>
+                <tr>
+                    <th id="th5-1"></th>
+                    <td id="l1"></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th id="th1-2"></th>
+                    <td>D2</td>
+                </tr>
+                <tr>
+                    <th id="th2-2"></th>
+                    <td id="d2"></td>
+                </tr>
+                <tr>
+                    <th id="th3-2"></th>
+                    <td id="vn2"></td>
+                </tr>
+                <tr>
+                    <th id="th4-2"></th>
+                    <td id="com2"></td>
+                </tr>
+                <tr>
+                    <th id="th5-2"></th>
+                    <td id="l2"></td>
+                </tr>
+            </table>
+            <p id="fvac"></p>
+            <p id="cadd"></p>
+        </div>
+        <div id="error" class="content">
+            <p style="text-align: center">There's been a problem.<br/>Please, try again later.</p>
+        </div>
+    </div>
+    <script>
+        function setFavicons(favImg){
+            let headTitle = document.querySelector('head');
+            let setFavicon = document.createElement('link');
+            setFavicon.setAttribute('rel','shortcut icon');
+            setFavicon.setAttribute('href',favImg);
+            headTitle.appendChild(setFavicon);
+        }
+        window.onload = () => {
+            const search = location.search;
+            const urlParams = new URLSearchParams(search);
+            console.log(search)
+            
+            let data = {};
+            urlParams.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            if(Object.keys(data).length > 0){
+                localStorage.setItem("data", JSON.stringify(data));
+                window.location.href="/"
+            }else{
+                data = JSON.parse(localStorage.getItem("data"));
+            }
+
+            if(data){
+                const pText = `
+                    ${data.t1}<br/><strong>${data.name}</strong><br/>
+                    ${data.t2}<strong>${data.birth}</strong> in <strong>${data.city}</strong><br/>
+                    ${data.t3}<strong>${data.res}</strong><br/>
+                    ${data.t4}<strong>${data.cf}</strong><br/>
+                    ${data.t5}<br/>
+                `
+                document.querySelector("#logo").src = data.logo;
+                document.querySelector("#logoLink").href = data.webLink;
+                document.querySelector("#p").innerHTML = pText;
+                document.querySelector("#th1-1").innerHTML = data.th1;
+                document.querySelector("#th2-1").innerHTML = data.th2;
+                document.querySelector("#th3-1").innerHTML = data.th3;
+                document.querySelector("#th4-1").innerHTML = data.th4;
+                document.querySelector("#th5-1").innerHTML = data.th5;
+                document.querySelector("#th1-2").innerHTML = data.th1;
+                document.querySelector("#th2-2").innerHTML = data.th2;
+                document.querySelector("#th3-2").innerHTML = data.th3;
+                document.querySelector("#th4-2").innerHTML = data.th4;
+                document.querySelector("#th5-2").innerHTML = data.th5;
+                document.querySelector("#d1").innerHTML = data.d1;
+                document.querySelector("#d2").innerHTML = data.d2;
+                document.querySelector("#vn1").innerHTML = data.vname;
+                document.querySelector("#vn2").innerHTML = data.vname;
+                document.querySelector("#com1").innerHTML = data.com;
+                document.querySelector("#com2").innerHTML = data.com;
+                document.querySelector("#l1").innerHTML = data.l1;
+                document.querySelector("#l2").innerHTML = data.l2;
+                document.querySelector("title").innerHTML = data.title;
+                document.querySelector("#cadd").innerHTML = data.cadd;
+                document.querySelector("#fvac").innerHTML = data.fvac;
+                setFavicons(data.favicon);
+    
+                document.querySelector("#error").style.display = "none";
+                document.querySelector("#content").style.display = "block";
+            }
+
+        }
+    </script>
 </body>
 </html>
