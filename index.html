@@ -8,61 +8,13 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
-    <div class="header">
-        <a id="logoLink"><img id="logo"/></a>
-    </div>
-    <div class="container">
-        <div id="content" class="content" style="display:none">
-            <p id="p"></p>
-            <table>
-                <tr>
-                    <th id="th1-1"></th>
-                    <td>D1</td>
-                </tr>
-                <tr>
-                    <th id="th2-1"></th>
-                    <td id="d1"></td>
-                </tr>
-                <tr>
-                    <th id="th3-1"></th>
-                    <td id="vn1"></td>
-                </tr>
-                <tr>
-                    <th id="th4-1"></th>
-                    <td id="com1"></td>
-                </tr>
-                <tr>
-                    <th id="th5-1"></th>
-                    <td id="l1"></td>
-                </tr>
-            </table>
-            <table>
-                <tr>
-                    <th id="th1-2"></th>
-                    <td>D2</td>
-                </tr>
-                <tr>
-                    <th id="th2-2"></th>
-                    <td id="d2"></td>
-                </tr>
-                <tr>
-                    <th id="th3-2"></th>
-                    <td id="vn2"></td>
-                </tr>
-                <tr>
-                    <th id="th4-2"></th>
-                    <td id="com2"></td>
-                </tr>
-                <tr>
-                    <th id="th5-2"></th>
-                    <td id="l2"></td>
-                </tr>
-            </table>
-            <p id="fvac"></p>
-            <p id="cadd"></p>
-        </div>
-        <div id="error" class="content">
-            <p style="text-align: center">There's been a problem.<br/>Please, try again later.</p>
+    <div id="main">
+        <div id="error" class="content" style="width: 100%; height: 100vh; display: flex; justify-content: center; align-items: center;">
+            <div class="group" style="text-align: center; margin: 1em 0;">
+                <span style="margin-bottom: 2em;">C'è stato un problema.<br/>Si prega di riprovare più tardi.</span>
+                <span style="font-style: italic;">There's been a problem.<br/>Please, try again later.</span>
+            </div>
+            <p style="text-align: center"></p>
         </div>
     </div>
     <script type="text/javascript" src="crypto-js/crypto-js.js"></script>
@@ -71,57 +23,22 @@
             let headTitle = document.querySelector('head');
             let setFavicon = document.createElement('link');
             setFavicon.setAttribute('rel','shortcut icon');
-            setFavicon.setAttribute('href',favImg);
+            setFavicon.setAttribute('href', favImg);
             headTitle.appendChild(setFavicon);
         }
-        window.onload = () => {
-            const crs = 'U2FsdGVkX194Zi564cw5ftC9PHGwBNsvBdW5pPW/kR3d3GucypsagSJZTh5G1L/QF+AE/TQwqMs2GLnHqqzkK8hDX7Bu/30bjXVg2JxIkTprJMUcmgmDX04Z0EfbyilOqp2K9UUkd47nOCQs1NeVCK9H/lzZEY9FBoN6ZuBx1hk3wcurqRMseCg80CCl13zsylVz3bMxsOnQZIicFVWXUgM1eZ69jw1H36ZVZewHBqBJQHi2IcNTuvhV9oUxjtgDlgXqsaG5jQWqZo0Er+7kNP0ZH3WhMKrLHhGNa7vAVQu1hj1rMHQB4+xhhpvlxxH4BohUqsXVMoaZPctyfYByZNDEK36DxH7iMxySUs/elQ8jZuyWErOuZxNAaGyPZ96vVm/d/9XVT6Dqb+rSuP1KC8H4Tzh/qp12gykxooDUV2Bdwrhz2dRXzQ5FB7IgG3ipMZ2oIj3ajjzWM/mfo8y7QLKJGrtLn1hE2Ut1yJjGeD+dZ82NsXJgaFEkmjrb48FCZytr/CHWUTOVB7h8l+bW0CjpiLVlcAN011n9oK08x7bM/K8PLKJW4f3f8dR8o81VB9h/fYtzsYR9gO3YepJojZdKPPoUJVLmtenI+1ERPm6fXjkh9iLzYPg5l/op6MppdzqNEiuHPn5ZcLG9c/CjOfYcH46qvpgAgVpjINBFWYwaDbVtq1x/LTM5jGHUqa1imweu8luFWr7te4mcxu6ATlAww9qdlUvb96pZQNWu++4TdcGxO2bookBnFXCUXuUC9O5y+LJ5Yw/OrjSPOEDi7oiLLHvPWVtMyEe0BP+ihiodchEMQspV+O6ZI1iwSueBIgMfjLi/tcGPjxS06NysIQC7ZAI+kWHQCLhWQj7DjbdLByE2wfGDPHf1OUcF47o8DCmEwzUBn36GOjznOnPumSQsWo1xRENzjAQWk4zbCB8Rmabqb9KrRuooOVmBZC+CcbKIrLmjEusYGs0fXryvRtjfk9mReFyCX80qbsX3NwLKbTA70r/xeB0LOzBBGBgPsxVySOV+Gk11MhfnWNybkZYLAJrzIG7D+3kvruIaBvz2hadYBPwt6UP3TZD7QtO53mQneSP1idnsB6ar1AKHWWqCcWLSkEWsPcksq9NuH+xk/xWzsFMR5MiAL5NR1JcnmvkzC3lxNEokIDzI3sJRUo73VejyB/jJSib3Qm+LxpGR0uAD0UBuhSzwjS6Dy+X314CMvAwYKXykV7D3MbARw5CCySE+DKM0SHcjcO6G0+9M5bZaD2weeMJMdLC0ZRVvl+iHTa/+5bNUPyvSvzkaQv6Oq+ewEwveW8nYDwDiovU=';
-            const bytes  = CryptoJS.AES.decrypt(crs, location.search);
-            const search = bytes.toString(CryptoJS.enc.Utf8);
-            const urlParams = new URLSearchParams(search);
-            
-            let data = {};
-            urlParams.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            if(data && Object.keys(data).length > 0){
-                const pText = `
-                    ${data.t1}<br/><strong>${data.name}</strong><br/>
-                    ${data.t2}<strong>${data.birth}</strong> in <strong>${data.city}</strong><br/>
-                    ${data.t3}<strong>${data.res}</strong><br/>
-                    ${data.t4}<strong>${data.cf}</strong><br/>
-                    ${data.t5}<br/>
-                `
-                document.querySelector("#logo").src = data.logo;
-                document.querySelector("#logoLink").href = data.webLink;
-                document.querySelector("#p").innerHTML = pText;
-                document.querySelector("#th1-1").innerHTML = data.th1;
-                document.querySelector("#th2-1").innerHTML = data.th2;
-                document.querySelector("#th3-1").innerHTML = data.th3;
-                document.querySelector("#th4-1").innerHTML = data.th4;
-                document.querySelector("#th5-1").innerHTML = data.th5;
-                document.querySelector("#th1-2").innerHTML = data.th1;
-                document.querySelector("#th2-2").innerHTML = data.th2;
-                document.querySelector("#th3-2").innerHTML = data.th3;
-                document.querySelector("#th4-2").innerHTML = data.th4;
-                document.querySelector("#th5-2").innerHTML = data.th5;
-                document.querySelector("#d1").innerHTML = data.d1;
-                document.querySelector("#d2").innerHTML = data.d2;
-                document.querySelector("#vn1").innerHTML = data.vname;
-                document.querySelector("#vn2").innerHTML = data.vname;
-                document.querySelector("#com1").innerHTML = data.com;
-                document.querySelector("#com2").innerHTML = data.com;
-                document.querySelector("#l1").innerHTML = data.l1;
-                document.querySelector("#l2").innerHTML = data.l2;
-                document.querySelector("title").innerHTML = data.title;
-                document.querySelector("#cadd").innerHTML = data.cadd;
-                document.querySelector("#fvac").innerHTML = data.fvac;
-                setFavicons(data.favicon);
-                document.querySelector("#error").style.display = "none";
-                document.querySelector("#content").style.display = "block";
-            }
+        function decrypt(crs, cd){
+            const bytes  = CryptoJS.AES.decrypt(crs, cd)
+            const originalText = bytes.toString(CryptoJS.enc.Utf8)
+            return originalText;
         }
+        const urlParams = new URLSearchParams(location.search);
+        const cf = urlParams.get('cf');
+        const crs1 = 'U2FsdGVkX19gG3ne1TaM9yrkvOq7bz2ngdYydne/24ZFmWzp6y/FG0wi9wwXk0wIgxRcPNjsP4zW3224AZ4c8Q==';
+        const crs2 = 'U2FsdGVkX18ARJ2iTIeeWG+K9ML7DtExPgIFOuYUz4tB5gnyhLlO1Bath5hXvAIL2IMFL3wMcotcEukjaHrMl8rSMvyVp9gwBN7w+i5MQbEy9XeaditjJc2yC+htsytXYv4+pMvwe14+wkGBFl8VKQ==';
+        const crs3 = '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';
+        setFavicons(decrypt(crs1, cf));
+        document.querySelector('title').innerHTML = decrypt(crs2, cf);
+        document.getElementById('main').innerHTML = decrypt(crs3, cf);
     </script>
 </body>
 </html>
